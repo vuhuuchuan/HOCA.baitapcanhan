@@ -1,0 +1,107 @@
+body {
+    background: #1a2980; 
+    height: 100vh;
+    margin: 0;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.container {
+    position: relative; 
+    width: 800px; 
+    height: 500px;
+    background: #1e5799; 
+    border: 5px solid #0d3b66;
+    overflow: hidden; 
+}
+
+/* Định dạng hình ảnh chung cho tất cả sinh vật */
+#shark, #turtle, #fish, #diver-navy, #diver-red, #diver-green {
+    position: absolute;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* --- 2. KÍCH THƯỚC VÀ HÌNH ẢNH --- */
+
+#shark {
+    width: 150px; height: 80px;
+    background-image: url('images/shark.jpg');
+    animation: sharkMove 15s linear infinite;
+}
+
+#turtle {
+    width: 100px; height: 70px;
+    background-image: url('images/turtle.jpg');
+    animation: turtleMove 20s linear infinite;
+}
+
+#fish {
+    width: 80px; height: 50px;
+    background-image: url('images/fish.jpg');
+    animation: fishMove 12s linear infinite;
+}
+
+/* Định dạng chung cho 3 thợ lặn */
+#diver-navy, #diver-red, #diver-green {
+    width: 120px; height: 100px;
+    animation: diverMove 18s ease-in-out infinite;
+}
+#diver-navy { background-image: url('images/diver_navy.jpg'); top: 50px; animation-delay: 0s; }
+#diver-red { background-image: url('images/diver_red.jpg'); top: 150px; animation-delay: 6s; }
+#diver-green { background-image: url('images/diver_green.jpg'); top: 250px; animation-delay: 12s; }
+
+
+/* Bong bóng */
+.bubble {
+    position: absolute; 
+    width: 20px; height: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    bottom: -50px;
+    animation: bubbleMove 8s linear infinite;
+}
+/* Áp dụng độ trễ cho bong bóng */
+.container > .bubble:nth-child(7) { animation-delay: 0s; }
+.container > .bubble:nth-child(8) { animation-delay: 2s; animation-duration: 7s; }
+.container > .bubble:nth-child(9) { animation-delay: 4s; animation-duration: 9s; }
+
+/* --- 3. ĐỊNH NGHĨA KEYFRAME CHUYỂN ĐỘNG (Đã sửa lỗi không xuyên suốt) --- */
+
+@keyframes sharkMove {
+    /* Bơi từ ngoài trái (-150px) sang ngoài phải (850px) */
+    0% { left: -150px; top: 100px; transform: scaleX(1); }
+    50% { left: 850px; top: 150px; transform: scaleX(1); }
+    50.01% { transform: scaleX(-1); }
+    100% { left: -150px; top: 100px; transform: scaleX(-1); }
+}
+
+@keyframes turtleMove {
+    /* Bơi từ ngoài phải (800px) sang ngoài trái (-150px) */
+    0% { left: 800px; top: 350px; transform: scaleX(1); }
+    50% { left: -150px; top: 350px; transform: scaleX(1); }
+    50.01% { transform: scaleX(-1); }
+    100% { left: 800px; top: 350px; transform: scaleX(-1); }
+}
+
+@keyframes fishMove {
+    /* Bơi từ ngoài trái (-80px) sang ngoài phải (850px), lượn sóng */
+    0% { left: -80px; top: 200px; transform: scaleX(1); }
+    50% { left: 850px; top: 250px; transform: scaleX(1); }
+    50.01% { transform: scaleX(-1); }
+    100% { left: -80px; top: 200px; transform: scaleX(-1); }
+}
+
+@keyframes diverMove {
+    /* Dùng cho 3 thợ lặn, bơi từ ngoài phải sang ngoài trái */
+    0% { left: 800px; transform: scaleX(-1); }
+    50% { left: -120px; transform: scaleX(1); }
+    100% { left: 800px; transform: scaleX(-1); }
+}
+
+@keyframes bubbleMove {
+    0% { bottom: -50px; opacity: 0; }
+    100% { bottom: 500px; opacity: 0; }
+}
